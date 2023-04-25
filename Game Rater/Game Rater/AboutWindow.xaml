@@ -1,0 +1,14 @@
+﻿<Window x:Name="aboutWindow" x:Class="Game_Rater.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Game_Rater"
+        mc:Ignorable="d"
+        Title="About Game Rater" Height="400" Width="400" ResizeMode="NoResize">
+    <Grid>
+        <Button x:Name="closeBtn" Content="Close" HorizontalAlignment="Center" Margin="0,325,0,0" VerticalAlignment="Top" Width="60" Click="closeBtn_Click"/>
+        <Label x:Name="nameLbl" Content="GAME RATER v1.0" HorizontalAlignment="Center" Margin="0,29,0,0" VerticalAlignment="Top" Height="63" Width="380" VerticalContentAlignment="Center" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="18"/>
+        <Label x:Name="infoLbl" Content="Game Rater is a user-friendly application developed in C# that allows &#xD;&#xA;gamers to keep track of their games and rate them. With Game Rater, &#xD;&#xA;users can simply enter their Steam, Playstation, Xbox, or Nintendo &#xD;&#xA;Switch ID to automatically import their game library into the app. &#xD;&#xA;Alternatively, the user is also able to enter a custom game if it is not&#xD;&#xA;on any of the provided platforms by clicking the plus button.&#xD;&#xA;Once the game library is imported, users can easily rate each game &#xD;&#xA;on a scale of 1 to 10.&#xD;&#xA;&#xD;&#xA;This product was developed by Peter Strzelbicki." HorizontalAlignment="Center" VerticalAlignment="Top" Width="380" Height="228" Margin="0,97,0,0"/>
+    </Grid>
+</Window>

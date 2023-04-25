@@ -53,5 +53,15 @@ namespace Game_Rater
                 searchBox.Foreground = Brushes.Gray;
             }
         }
+
+        /*
+        function     : aboutMenu_Click()
+        description  : This function displays the "About" window.
+        */
+        private void aboutMenu_Click(object sender, RoutedEventArgs e)
+        {
+            AboutWindow aboutWindow = new AboutWindow();
+            aboutWindow.ShowDialog();
+        }
     }
 }
