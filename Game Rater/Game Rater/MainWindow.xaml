@@ -10,24 +10,32 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="About" x:Name="aboutMenu" Click="aboutMenu_Click"/>
         </Menu>
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="30,57,30,0">
+        <Grid DockPanel.Dock="Top" Margin="30,57,30,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="55"/>
+                <ColumnDefinition Width="55"/>
+                <ColumnDefinition Width="55"/>
+                <ColumnDefinition Width="55"/>
+                <ColumnDefinition Width="449*"/>
+                <ColumnDefinition Width="55"/>
+            </Grid.ColumnDefinitions>
             <Button x:Name="steamBtn" Height="50" Width="50" Margin="0,0,5,0">
                 <Image Source="C:\Personal Coding Projects\Game-Rater\Game Rater\Game Rater\resources\steam.png" Stretch="Fill" />
             </Button>
-            <Button x:Name="psBtn" Height="50 " Width="50" Margin="0,0,5,0">
+            <Button x:Name="psBtn" Height="50 " Width="50" Margin="0,0,5,0" Grid.Column="1">
                 <Image Source="C:\Personal Coding Projects\Game-Rater\Game Rater\Game Rater\resources\playstation.png" Stretch="Fill" />
             </Button>
-            <Button x:Name="xboxBtn" Height="50 " Width="50" Margin="0,0,5,0">
+            <Button x:Name="xboxBtn" Height="50 " Margin="0,0,0,0" Grid.Column="2" HorizontalAlignment="Left" Width="50" Grid.ColumnSpan="2">
                 <Image Source="C:\Personal Coding Projects\Game-Rater\Game Rater\Game Rater\resources\xbox.png" Stretch="Fill" />
             </Button>
-            <Button x:Name="switchBtn" Height="50" Width="50">
-                <Image Source="C:\Personal Coding Projects\Game-Rater\Game Rater\Game Rater\resources\switch.png" Stretch="Fill" />
+            <Button x:Name="switchBtn" Height="50" Width="50" Grid.Column="3" Margin="0,0,0,0" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                <Image Source="C:\Personal Coding Projects\Game-Rater\Game Rater\Game Rater\resources\switch.png" Stretch="Fill" Width="40" />
             </Button>
-            <TextBox x:Name="searchBox" TextWrapping="Wrap" Text="Search" GotFocus="searchBox_GotFocus" LostFocus="searchBox_LostFocus" TextChanged="searchBox_TextChanged" Height="50" Width="300" MinHeight="50" MinWidth="300" MaxHeight="50" MaxWidth="300" FontSize="36" Margin="0,0,5,0"/>
-            <Button x:Name="newGameBtn" Content="+" Height="50" Width="50" FontSize="36" FontFamily="Arial"/>
-        </StackPanel>
-        <StackPanel x:Name="stackPanel2" DockPanel.Dock="Top" Orientation="Horizontal" Margin="30,10,30,30">
-            <ListBox x:Name="gameList" Width="740">
+            <TextBox x:Name="searchBox" TextWrapping="Wrap" Text="Search" HorizontalAlignment="Right" GotFocus="searchBox_GotFocus" LostFocus="searchBox_LostFocus" TextChanged="searchBox_TextChanged" Height="50" Width="300" MinHeight="50" MinWidth="300" MaxHeight="50" MaxWidth="300" FontSize="36" Margin="0,0,0,0" Grid.Column="4"/>
+            <Button x:Name="newGameBtn" Content="+" Height="50" Width="50" FontSize="36" FontFamily="Arial" Grid.Column="5"/>
+        </Grid>
+        <Grid x:Name="gridPanel2" DockPanel.Dock="Top" Margin="30,10,30,30">
+            <ListBox x:Name="gameList">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -44,7 +52,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
 
-        </StackPanel>
+        </Grid>
 
     </DockPanel>
 
