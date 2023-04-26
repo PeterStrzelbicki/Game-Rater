@@ -38,11 +38,11 @@ namespace Game_Rater
     {
 
         public ObservableCollection<Game> Games { get; set; } = new ObservableCollection<Game>();
+        public Game editItem;
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = this;
             searchBox.Foreground = Brushes.Gray;
             
             Games.Add(new Game {Name = "Game 1", Score = 10});
@@ -50,6 +50,31 @@ namespace Game_Rater
             Games.Add(new Game { Name = "Persona 5", Score = 11 });
             Games.Add(new Game { Name = "Call of Duty 4", Score = 8 });
             gameList.ItemsSource = Games;
+            listSize.Content = Games.Count.ToString();
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            editItem = gameList.SelectedItem as Game;
+            EditWindow editWindow = new EditWindow(editItem, this);
+            editWindow.ShowDialog();
+
+        }
+
+        public void GameUpdated(Game game)
+        {
+            int index = Games.IndexOf(editItem);
+            if (index == -1)
+            {
+                Games.Add(game);
+                listSize.Content = Games.Count.ToString();
+            }
+            else
+            {
+                Games.RemoveAt(index);
+                Games.Insert(index, game); 
+            }
+
         }
 
         private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -58,7 +83,7 @@ namespace Game_Rater
 
             if (gameList != null)
             {
-                if (searchText != "Search" || !string.IsNullOrEmpty(searchText))
+                if (!string.IsNullOrEmpty(searchText))
                 {
                     var viewSource = CollectionViewSource.GetDefaultView(gameList.ItemsSource);
                     viewSource.Filter = g => ((Game)g).Name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0;
@@ -101,7 +126,8 @@ namespace Game_Rater
 
         private void newGameBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            AddWindow addWindow = new AddWindow(this);
+            addWindow.ShowDialog();
         }
     }
 }

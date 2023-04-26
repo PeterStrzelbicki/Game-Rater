@@ -1,0 +1,17 @@
+﻿<Window x:Class="Game_Rater.AddWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Game_Rater"
+        mc:Ignorable="d"
+        Title="Add a Game" Height="250" Width="600" ResizeMode="NoResize">
+    <Grid>
+        <Button x:Name="addBtn" Content="Add" HorizontalAlignment="Center" Margin="-100,180,0,0" VerticalAlignment="Top" Width="60" Click="addBtn_Click"/>
+        <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Center" Margin="100,180,0,0" VerticalAlignment="Top" Width="60" Click="cancelBtn_Click"/>
+        <TextBox x:Name="nameBox" HorizontalAlignment="Center" Margin="0,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="540" Height="32" TextAlignment="Center" FontSize="22"/>
+        <TextBox x:Name="scoreBox" HorizontalAlignment="Center" Margin="0,117,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" Height="32" TextAlignment="Center" FontSize="24"/>
+        <Label Content="Name" HorizontalAlignment="Center" Margin="0,17,0,0" VerticalAlignment="Top"/>
+        <Label Content="Score" HorizontalAlignment="Center" Margin="0,86,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

@@ -33,8 +33,15 @@
             </Button>
             <TextBox x:Name="searchBox" TextWrapping="Wrap" Text="Search" HorizontalAlignment="Right" GotFocus="searchBox_GotFocus" LostFocus="searchBox_LostFocus" TextChanged="searchBox_TextChanged" Height="50" Width="300" MinHeight="50" MinWidth="300" MaxHeight="50" MaxWidth="300" FontSize="36" Margin="0,0,0,0" Grid.Column="4"/>
             <Button x:Name="newGameBtn" HorizontalAlignment="Right" Content="+" Height="50" Width="50" FontSize="36" FontFamily="Arial" Grid.Column="5" Click="newGameBtn_Click"/>
+            <Label Grid.Column="4" Content="# of Games:" HorizontalAlignment="Left" Margin="146,0,0,0" VerticalAlignment="Center" FontSize="36"/>
+            <Label x:Name="listSize" Grid.Column="4" Content="" HorizontalAlignment="Left" Margin="350,4,0,0" VerticalAlignment="Top" FontSize="36"/>
         </Grid>
-        <ListView x:Name="gameList" Grid.Row="1" BorderBrush="Black" Margin="30,10" HorizontalContentAlignment="Stretch" FontSize="36" FontFamily="Arial">
+        <ListView x:Name="gameList" Grid.Row="1" BorderBrush="Black" Margin="30,10,30,30" HorizontalContentAlignment="Stretch" FontSize="36" FontFamily="Arial" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.Resources>
+                <ContextMenu x:Key="itemContextMenu">
+                    <MenuItem Header="Edit" Click="Edit_Click"/>
+                </ContextMenu>
+            </ListView.Resources>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Name" Width="900" DisplayMemberBinding="{Binding Name}">
@@ -81,6 +88,11 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="ContextMenu" Value="{StaticResource itemContextMenu}"/>
+                </Style>
+            </ListView.ItemContainerStyle>
         </ListView>
     </DockPanel>
 </Window>
