@@ -60,6 +60,12 @@ namespace Game_Rater
             editWindow.ShowDialog();
 
         }
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var removed = gameList.SelectedItem as Game;
+            Games.Remove(removed);
+            listSize.Content = Games.Count.ToString();
+        }
 
         public void GameUpdated(Game game)
         {
