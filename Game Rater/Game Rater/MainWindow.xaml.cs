@@ -21,6 +21,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
+using System.ComponentModel;
 
 namespace Game_Rater
 {        
@@ -49,6 +50,7 @@ namespace Game_Rater
             Games.Add(new Game { Name = "Game 2", Score = 5});
             Games.Add(new Game { Name = "Persona 5", Score = 11 });
             Games.Add(new Game { Name = "Call of Duty 4", Score = 8 });
+            Games = new ObservableCollection<Game>(Games.OrderBy(x => x.Name));
             gameList.ItemsSource = Games;
             listSize.Content = Games.Count.ToString();
         }
@@ -81,6 +83,20 @@ namespace Game_Rater
                 Games.Insert(index, game); 
             }
 
+        }
+
+        private void NameHeader_Click(object sender, MouseButtonEventArgs e)
+        {
+            ICollectionView view = CollectionViewSource.GetDefaultView(gameList.ItemsSource);
+            view.SortDescriptions.Clear();
+            view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+        }
+
+        private void ScoreHeader_Click(object sender, MouseButtonEventArgs e)
+        {
+            ICollectionView view = CollectionViewSource.GetDefaultView(gameList.ItemsSource);
+            view.SortDescriptions.Clear();
+            view.SortDescriptions.Add(new SortDescription("Score", ListSortDirection.Descending));
         }
 
         private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
