@@ -40,17 +40,21 @@ namespace Game_Rater
 
         public ObservableCollection<Game> Games { get; set; } = new ObservableCollection<Game>();
         public Game editItem;
+        private bool sortByName;
 
         public MainWindow()
         {
             InitializeComponent();
             searchBox.Foreground = Brushes.Gray;
-            
+
+            sortByName = true;
             Games.Add(new Game {Name = "Game 1", Score = 10});
             Games.Add(new Game { Name = "Game 2", Score = 5});
-            Games.Add(new Game { Name = "Persona 5", Score = 11 });
+            Games.Add(new Game { Name = "Persona 5", Score = 5 });
             Games.Add(new Game { Name = "Call of Duty 4", Score = 8 });
-            Games = new ObservableCollection<Game>(Games.OrderBy(x => x.Name));
+            Games.Add(new Game { Name = "Minecraft", Score = 10 });
+            Games.Add(new Game { Name = "Stardew Valley", Score = 6 });
+            SortList();
             gameList.ItemsSource = Games;
             listSize.Content = Games.Count.ToString();
         }
@@ -67,6 +71,7 @@ namespace Game_Rater
             var removed = gameList.SelectedItem as Game;
             Games.Remove(removed);
             listSize.Content = Games.Count.ToString();
+            gameList.ItemsSource = Games;
         }
 
         public void GameUpdated(Game game)
@@ -76,13 +81,27 @@ namespace Game_Rater
             {
                 Games.Add(game);
                 listSize.Content = Games.Count.ToString();
+                SortList();
             }
             else
             {
                 Games.RemoveAt(index);
                 Games.Insert(index, game); 
+                SortList();
             }
+            gameList.ItemsSource = Games;
+        }
 
+        private void SortList()
+        {
+            if(sortByName)
+            {
+                Games = new ObservableCollection<Game>(Games.OrderBy(x => x.Name));
+            }
+            else
+            {
+                Games = new ObservableCollection<Game>(Games.OrderBy(x => x.Score));
+            }
         }
 
         private void NameHeader_Click(object sender, MouseButtonEventArgs e)
@@ -90,6 +109,7 @@ namespace Game_Rater
             ICollectionView view = CollectionViewSource.GetDefaultView(gameList.ItemsSource);
             view.SortDescriptions.Clear();
             view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+            sortByName = true;
         }
 
         private void ScoreHeader_Click(object sender, MouseButtonEventArgs e)
@@ -97,6 +117,7 @@ namespace Game_Rater
             ICollectionView view = CollectionViewSource.GetDefaultView(gameList.ItemsSource);
             view.SortDescriptions.Clear();
             view.SortDescriptions.Add(new SortDescription("Score", ListSortDirection.Descending));
+            sortByName = false;
         }
 
         private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -105,15 +126,15 @@ namespace Game_Rater
 
             if (gameList != null)
             {
-                if (!string.IsNullOrEmpty(searchText))
+                if (searchText != "Search" && !string.IsNullOrEmpty(searchText))
                 {
                     var viewSource = CollectionViewSource.GetDefaultView(gameList.ItemsSource);
                     viewSource.Filter = g => ((Game)g).Name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0;
                 }
                 else
                 {
-                    var viewSource = CollectionViewSource.GetDefaultView(gameList.ItemsSource);
-                    viewSource.Filter = null;
+                        var viewSource = CollectionViewSource.GetDefaultView(gameList.ItemsSource);
+                        viewSource.Filter = null;
                 }
             }
         }

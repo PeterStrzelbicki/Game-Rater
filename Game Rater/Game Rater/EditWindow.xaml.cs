@@ -38,19 +38,51 @@ namespace Game_Rater
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-            Game game = new Game();
-            // Get the text entered in the nameBox and scoreBox
-            string name = nameBox.Text;
-            int score = int.Parse(scoreBox.Text);
+            if(IsValid()) 
+            {
+                Game game = new Game();
+                // Get the text entered in the nameBox and scoreBox
+                string name = nameBox.Text;
+                int score = int.Parse(scoreBox.Text);
 
-            // Update the game object with the new values
-            game.Name = name;
-            game.Score = score;            
-            mainWindow.GameUpdated(game);
+                // Update the game object with the new values
+                game.Name = name;
+                game.Score = score;            
+                mainWindow.GameUpdated(game);
 
-            // Close the child window and return the updated game object to the parent window
-            this.Close();
+                // Close the child window and return the updated game object to the parent window
+                this.Close();
+            }
+        }
 
+        private bool IsValid()
+        {
+            int number;
+
+            if (string.IsNullOrWhiteSpace(nameBox.Text))
+            {
+                MessageBox.Show("Name can not be empty.", "Error");
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(scoreBox.Text))
+            {
+                MessageBox.Show("Score can not be empty.", "Error");
+                return false;
+            }
+            else if (int.TryParse(scoreBox.Text, out number) == false)
+            {
+                MessageBox.Show("Score must be an integer from 1-10.", "Error");
+                return false;
+            }
+            else if (number < 1 || number > 10)
+            {
+                MessageBox.Show("Score must be an integer from 1-10.", "Error");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

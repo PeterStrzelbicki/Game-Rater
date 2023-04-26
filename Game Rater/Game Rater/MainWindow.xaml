@@ -56,12 +56,16 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
                                             <Border Background="Transparent" BorderThickness="0" BorderBrush="Black">
-                                                <TextBlock Text="{TemplateBinding Content}" Padding="5,0,0,0"
-                                       MouseLeftButtonDown="NameHeader_Click"/>
+                                                <TextBlock Text="{TemplateBinding Content}" Padding="5,0,0,0"  MouseLeftButtonDown="NameHeader_Click"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="LightSkyBlue"/>
+                                    </Trigger>
+                                </Style.Triggers>
                             </Style>
                         </GridViewColumn.HeaderContainerStyle>
                     </GridViewColumn>
@@ -77,12 +81,16 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
                                             <Border Background="Transparent" BorderThickness="1">
-                                                <TextBlock Text="{TemplateBinding Content}" Padding="5,0,0,0"
-                                       MouseLeftButtonDown="ScoreHeader_Click"/>
+                                                <TextBlock Text="{TemplateBinding Content}" Padding="5,0,0,0" MouseLeftButtonDown="ScoreHeader_Click"/>
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="LightSkyBlue"/>
+                                    </Trigger>
+                                </Style.Triggers>
                             </Style>
                         </GridViewColumn.HeaderContainerStyle>
                     </GridViewColumn>
