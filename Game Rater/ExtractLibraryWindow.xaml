@@ -1,0 +1,15 @@
+﻿<Window x:Class="Game_Rater.ExtractLibraryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Game_Rater"
+        mc:Ignorable="d"
+        Title="Import Library" Height="250" Width="600" ResizeMode="NoResize">
+    <Grid>
+        <Button x:Name="importBtn" Content="Import" HorizontalAlignment="Center" Margin="-100,180,0,0" VerticalAlignment="Top" Width="60" Click="importBtn_Click"/>
+        <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Center" Margin="100,180,0,0" VerticalAlignment="Top" Width="60" Click="closeBtn_Click"/>
+        <TextBox x:Name="IDBox" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Test" VerticalAlignment="Center" Width="540" Height="32" TextAlignment="Center" FontSize="22"/>
+        <Label x:Name="infoLbl" Content="Test" HorizontalAlignment="Center" Margin="0,52,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

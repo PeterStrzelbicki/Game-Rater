@@ -23,6 +23,8 @@ using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.ComponentModel;
 
+
+
 namespace Game_Rater
 {        
     public class Game
@@ -37,6 +39,10 @@ namespace Game_Rater
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const int STEAM = 1;
+        private const int PLAYSTATION = 2;
+        private const int XBOX = 3;
+        private const int SWITCH = 4;
 
         public ObservableCollection<Game> Games { get; set; } = new ObservableCollection<Game>();
         public Game editItem;
@@ -48,7 +54,7 @@ namespace Game_Rater
             searchBox.Foreground = Brushes.Gray;
 
             sortByName = true;
-            Games.Add(new Game {Name = "Game 1", Score = 10});
+            Games.Add(new Game { Name = "Game 1", Score = 10});
             Games.Add(new Game { Name = "Game 2", Score = 5});
             Games.Add(new Game { Name = "Persona 5", Score = 5 });
             Games.Add(new Game { Name = "Call of Duty 4", Score = 8 });
@@ -61,17 +67,26 @@ namespace Game_Rater
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            editItem = gameList.SelectedItem as Game;
-            EditWindow editWindow = new EditWindow(editItem, this);
-            editWindow.ShowDialog();
+            if (gameList.SelectedItem != null)
+            {
+                if ((editItem = gameList.SelectedItem as Game) != null)
+                {
+                    EditWindow editWindow = new EditWindow(editItem, this);
+                    editWindow.ShowDialog();
+                }
+            }
 
         }
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             var removed = gameList.SelectedItem as Game;
-            Games.Remove(removed);
-            listSize.Content = Games.Count.ToString();
-            gameList.ItemsSource = Games;
+
+            if (removed != null)
+            {
+                Games.Remove(removed);
+                listSize.Content = Games.Count.ToString();
+                gameList.ItemsSource = Games;
+            }
         }
 
         public void GameUpdated(Game game)
@@ -171,6 +186,30 @@ namespace Game_Rater
         {
             AddWindow addWindow = new AddWindow(this);
             addWindow.ShowDialog();
+        }
+
+        private void steamBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ExtractLibraryWindow libraryWindow = new ExtractLibraryWindow(STEAM, this);
+            libraryWindow.ShowDialog();
+        }
+
+        private void psBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ExtractLibraryWindow libraryWindow = new ExtractLibraryWindow(PLAYSTATION, this);
+            libraryWindow.ShowDialog();
+        }
+
+        private void xboxBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ExtractLibraryWindow libraryWindow = new ExtractLibraryWindow(XBOX, this);
+            libraryWindow.ShowDialog();
+        }
+
+        private void switchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ExtractLibraryWindow libraryWindow = new ExtractLibraryWindow(SWITCH, this);
+            libraryWindow.ShowDialog();
         }
     }
 }
