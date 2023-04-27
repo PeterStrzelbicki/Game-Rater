@@ -17,26 +17,22 @@ using System.Text.Json;
 
 namespace Game_Rater
 {
-    public class ExtractedGame
-    {
-        public int AppId { get; set; }
-        public string Name { get; set; }
-    }
 
     /// <summary>
     /// Interaction logic for ExtractLibraryWindow.xaml
     /// </summary>
     public partial class ExtractLibraryWindow : Window
     {        
-        private ObservableCollection<Game> games = new ObservableCollection<Game>();
+        private ObservableCollection<Game> games;
         private readonly string apiKey;
-
+        private MainWindow mainWindow;
 
         public ExtractLibraryWindow(int platform, MainWindow main)
         {
             InitializeComponent();
 
             games = main.Games;
+            mainWindow = main;
 
             if (platform == 1)
             {
@@ -57,7 +53,7 @@ namespace Game_Rater
             }
         }
 
-        public async Task<List<ExtractedGame>> ExtractSteamLibrary()
+        public async Task<ObservableCollection<Game>> ExtractSteamLibrary()
         {
             var client = new HttpClient();
             var url = $"http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key={apiKey}&steamid={IDBox.Text}&format=json&include_appinfo=1&include_played_free_games=1";
@@ -67,23 +63,36 @@ namespace Game_Rater
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
-            var responseObject = JsonSerializer.Deserialize<Dictionary<string, dynamic>>(responseContent, jsonOptions);
-            var gamesList = responseObject["response"]["games"];
-            var games = new List<ExtractedGame>();
-            foreach (var game in gamesList)
+            var responseObject = JsonSerializer.Deserialize<JsonElement>(responseContent, jsonOptions);
+            if (responseObject.TryGetProperty("response", out var responseElement) && responseElement.TryGetProperty("games", out var gamesList))
             {
-                games.Add(new ExtractedGame
+                var games = new ObservableCollection<Game>();
+                foreach (var game in gamesList.EnumerateArray())
                 {
-                    AppId = game["appid"],
-                    Name = game["name"],
-                });
+                    games.Add(new Game
+                    {
+                        Name = game.GetProperty("name").GetString(),
+                        Score = 0
+                    });
+                }
+                return games;
             }
-            return games;
+            else
+            {
+                MessageBox.Show("Something went wrong.", "Error");
+            }
+
+            return null;
         }
 
-        private void importBtn_Click(object sender, RoutedEventArgs e)
+        private async void importBtn_Click(object sender, RoutedEventArgs e)
         {
+            games = await ExtractSteamLibrary();
 
+            mainWindow.Games = games;
+            mainWindow.LibraryExtracted();
+
+            this.Close();
         }
 
         private void closeBtn_Click(object sender, RoutedEventArgs e)

@@ -20,18 +20,18 @@
                 <ColumnDefinition Width="55"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="steamBtn" Height="50" Width="50" Margin="0,0,5,0" Click="steamBtn_Click">
-                <Image Source="..\Game Rater\resources\steam.png" Stretch="Fill" />
+                <Image x:Name="steamImg" Stretch="Fill" />
             </Button>
             <Button x:Name="psBtn" Height="50 " Width="50" Margin="0,0,5,0" Grid.Column="1" Click="psBtn_Click">
-                <Image Source="..\Game Rater\resources\playstation.png" Stretch="Fill" />
+                <Image x:Name="psImg" Stretch="Fill" />
             </Button>
             <Button x:Name="xboxBtn" Height="50 " Margin="0,0,0,0" Grid.Column="2" HorizontalAlignment="Left" Width="50" Grid.ColumnSpan="2" Click="xboxBtn_Click">
-                <Image Source="..\Game Rater\resources\xbox.png" Stretch="Fill" />
+                <Image x:Name="xboxImg" Stretch="Fill" />
             </Button>
             <Button x:Name="switchBtn" Height="50" Width="50" Grid.Column="3" Margin="0,0,0,0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Click="switchBtn_Click">
-                <Image Source="..\Game Rater\resources\switch.png" Stretch="Fill" />
+                <Image x:Name="switchImg" Stretch="Fill" />
             </Button>
-            <TextBox x:Name="searchBox" TextWrapping="Wrap" Text="Search" HorizontalAlignment="Right" GotFocus="searchBox_GotFocus" LostFocus="searchBox_LostFocus" TextChanged="searchBox_TextChanged" Height="50" Width="300" MinHeight="50" MinWidth="300" MaxHeight="50" MaxWidth="300" FontSize="36" Margin="0,0,0,0" Grid.Column="4"/>
+            <TextBox x:Name="searchBox" TextWrapping="Wrap" Foreground="Gray" Text="Search" HorizontalAlignment="Right" GotFocus="searchBox_GotFocus" LostFocus="searchBox_LostFocus" TextChanged="searchBox_TextChanged" Height="50" Width="300" MinHeight="50" MinWidth="300" MaxHeight="50" MaxWidth="300" FontSize="36" Margin="0,0,0,0" Grid.Column="4"/>
             <Button x:Name="newGameBtn" HorizontalAlignment="Right" Content="+" Height="50" Width="50" FontSize="36" FontFamily="Arial" Grid.Column="5" Click="newGameBtn_Click"/>
             <Label Grid.Column="4" Content="# of Games:" HorizontalAlignment="Left" Margin="146,0,0,0" VerticalAlignment="Center" FontSize="36"/>
             <Label x:Name="listSize" Grid.Column="4" Content="" HorizontalAlignment="Left" Margin="350,4,0,0" VerticalAlignment="Top" FontSize="36"/>

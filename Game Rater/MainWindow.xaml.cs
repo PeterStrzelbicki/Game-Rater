@@ -18,10 +18,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+//using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.ComponentModel;
+using System.IO;
 
 
 
@@ -51,16 +52,19 @@ namespace Game_Rater
         public MainWindow()
         {
             InitializeComponent();
-            searchBox.Foreground = Brushes.Gray;
+            var imagePath = Path.Combine(Environment.CurrentDirectory, "images", "steam.png");
+            steamImg.Source = new BitmapImage(new Uri(imagePath));
+
+            imagePath = Path.Combine(Environment.CurrentDirectory, "images", "playstation.png");
+            psImg.Source = new BitmapImage(new Uri(imagePath));
+
+            imagePath = Path.Combine(Environment.CurrentDirectory, "images", "xbox.png");
+            xboxImg.Source = new BitmapImage(new Uri(imagePath));
+
+            imagePath = Path.Combine(Environment.CurrentDirectory, "images", "switch.png");
+            switchImg.Source = new BitmapImage(new Uri(imagePath));
 
             sortByName = true;
-            Games.Add(new Game { Name = "Game 1", Score = 10});
-            Games.Add(new Game { Name = "Game 2", Score = 5});
-            Games.Add(new Game { Name = "Persona 5", Score = 5 });
-            Games.Add(new Game { Name = "Call of Duty 4", Score = 8 });
-            Games.Add(new Game { Name = "Minecraft", Score = 10 });
-            Games.Add(new Game { Name = "Stardew Valley", Score = 6 });
-            SortList();
             gameList.ItemsSource = Games;
             listSize.Content = Games.Count.ToString();
         }
@@ -87,6 +91,13 @@ namespace Game_Rater
                 listSize.Content = Games.Count.ToString();
                 gameList.ItemsSource = Games;
             }
+        }
+
+        public void LibraryExtracted()
+        {
+            SortList();
+            gameList.ItemsSource = Games;
+            listSize.Content = Games.Count.ToString();
         }
 
         public void GameUpdated(Game game)

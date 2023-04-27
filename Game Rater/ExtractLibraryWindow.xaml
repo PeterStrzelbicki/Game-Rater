@@ -9,7 +9,7 @@
     <Grid>
         <Button x:Name="importBtn" Content="Import" HorizontalAlignment="Center" Margin="-100,180,0,0" VerticalAlignment="Top" Width="60" Click="importBtn_Click"/>
         <Button x:Name="cancelBtn" Content="Cancel" HorizontalAlignment="Center" Margin="100,180,0,0" VerticalAlignment="Top" Width="60" Click="closeBtn_Click"/>
-        <TextBox x:Name="IDBox" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Test" VerticalAlignment="Center" Width="540" Height="32" TextAlignment="Center" FontSize="22"/>
+        <TextBox x:Name="IDBox" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="540" Height="32" TextAlignment="Center" FontSize="22"/>
         <Label x:Name="infoLbl" Content="Test" HorizontalAlignment="Center" Margin="0,52,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
